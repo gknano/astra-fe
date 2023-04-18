@@ -1,0 +1,21 @@
+@import './normalize.scss';
+
+// Colors
+$primary-color: gray;
+$secondary-color: lightgray;
+$background-color: white;
+
+// Container
+$app-container-width: 100vw;
+
+$padding: 20px;
+
+.app-container {
+  max-width: $app-container-width;
+  margin: 0 auto;
+}
+
+.content-container {
+  display: flex;
+  flex-wrap: wrap;
+}

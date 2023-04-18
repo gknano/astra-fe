@@ -1,0 +1,8 @@
+@import '../styles/styles.scss';
+
+.content {
+  flex: 1;
+  background-color: $background-color;
+  height: calc(100vh - 50px);
+  padding: $padding;
+}
