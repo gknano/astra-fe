@@ -3,11 +3,11 @@ import type { TodosDTO } from '../types';
 import './Table.scss';
 
 const columns = [
-  { label: 'ID', key: 'id', width: '5%' },
-  { label: 'User', key: 'user', width: '10%' },
-  { label: 'Title', key: 'title', width: '55%' },
-  { label: 'Status', key: 'status', width: '15%' },
-  { label: 'Actions', key: 'actions', width: '15%' },
+  { label: 'ID', width: '5%' },
+  { label: 'User', width: '10%' },
+  { label: 'Title', width: '55%' },
+  { label: 'Status', width: '15%' },
+  { label: 'Actions', width: '15%' },
 ];
 
 interface TableProps {
@@ -31,8 +31,8 @@ export function Table(props: TableProps) {
         ))}
       </div>
       <div className="table-body">
-        {data.map((item, index) => (
-          <div key={index} className="table-row">
+        {data.map((item) => (
+          <div key={item.id} className="table-row">
             <div
               className="table-row-column column-0"
               style={{ width: columns[0].width }}

@@ -6,13 +6,3 @@ interface TodosEntries {
 }
 
 export type TodosDTO = TodosEntries[] | [];
-
-// export interface TodosState {
-//   data: TodosDTO;
-// }
-
-export interface ApiResponse<T> {
-  status: string;
-  message: string;
-  data: T;
-}
