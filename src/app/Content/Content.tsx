@@ -24,7 +24,7 @@ export function Content() {
 
   return (
     <main className="content">
-      <Table columns={data} />
+      <Table data={data} />
     </main>
   );
 }
