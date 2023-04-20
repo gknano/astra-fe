@@ -1,7 +1,8 @@
 import { Header } from './Header';
 import { Navbar } from './Navbar';
 import { Content } from './Content';
-import './styles/styles.scss';
+
+import '../styles/styles.scss';
 
 function App() {
   return (
