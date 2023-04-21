@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import type { TodosDTO } from '../types';
 
 import './Table.scss';
@@ -12,10 +14,11 @@ const columns = [
 
 interface TableProps {
   data: TodosDTO;
+  onClickOpen: () => void;
 }
 
 export function Table(props: TableProps) {
-  const { data } = props;
+  const { data, onClickOpen } = props;
 
   return (
     <div className="table-container">
@@ -58,7 +61,9 @@ export function Table(props: TableProps) {
               {item.completed ? 'Done' : 'Not done'}
             </div>
             <div className="table-row-column column-4">
-              <button className="buttons">Edit</button>
+              <button className="buttons" onClick={onClickOpen}>
+                Edit
+              </button>
               <button className="buttons">Delete</button>
             </div>
           </div>
@@ -67,3 +72,5 @@ export function Table(props: TableProps) {
     </div>
   );
 }
+
+export const MemoizeTable = memo(Table);

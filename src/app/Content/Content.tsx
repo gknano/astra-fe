@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import { getData } from './api';
-import { Table } from './Table';
+import { MemoizeTable } from './Table';
+import { Modal } from './Modal';
+import { useBooleanState } from '../../hooks';
 
 import type { AxiosResponse } from 'axios';
 import type { TodosDTO } from './types';
@@ -10,6 +12,7 @@ import './Content.scss';
 
 export function Content() {
   const [data, setData] = useState<TodosDTO>([]);
+  const [isShowModal, setTrue, setFalse] = useBooleanState(false);
 
   useEffect(() => {
     getData()
@@ -24,7 +27,8 @@ export function Content() {
 
   return (
     <main className="content">
-      <Table data={data} />
+      <Modal showModal={isShowModal} onClickClose={setFalse} />
+      <MemoizeTable data={data} onClickOpen={setTrue} />
     </main>
   );
 }
