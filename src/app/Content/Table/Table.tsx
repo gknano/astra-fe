@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import type { TodosDTO } from '../types';
+import type { TodosDTO } from '../../../Context/types';
 
 import './Table.scss';
 
@@ -12,12 +12,12 @@ const columns = [
   { label: 'Actions', width: '15%' },
 ];
 
-interface TableProps {
+interface ITableProps {
   data: TodosDTO;
   onClickOpen: () => void;
 }
 
-export function Table(props: TableProps) {
+export function Table(props: ITableProps) {
   const { data, onClickOpen } = props;
 
   return (
@@ -65,6 +65,7 @@ export function Table(props: TableProps) {
                 Edit
               </button>
               <button className="buttons">Delete</button>
+              <button className="buttons">Add</button>
             </div>
           </div>
         ))}
