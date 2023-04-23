@@ -9,3 +9,38 @@
   left: 0;
   padding: $padding;
 }
+
+.filter-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-menu__item {
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.filter-menu__item label {
+  margin-right: 0.5rem;
+  text-align: left;
+}
+
+.filter-menu__item select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
