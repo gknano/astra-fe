@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface ITodosEntries {
+export interface ITodosEntries {
   userId: number;
   id: number;
   title: string;

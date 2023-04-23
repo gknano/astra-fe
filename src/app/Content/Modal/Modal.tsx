@@ -1,14 +1,22 @@
+import { useContext, useState } from 'react';
 import ReactModal from 'react-modal';
+
+import { TodosContext } from '../../../Context';
+
+import type { ITodosEntries } from '../../../Context/types';
 
 interface ModalProps {
   showModal: boolean;
-  onClickClose: () => void;
+  selectedRow: ITodosEntries;
+  clearSelectedRow: () => void;
 }
 
 ReactModal.setAppElement('#root');
 
 const customModalStyles = {
   content: {
+    width: '400px',
+    height: '200px',
     padding: '10px',
     top: '50%',
     left: '50%',
@@ -20,34 +28,76 @@ const customModalStyles = {
 };
 
 export const Modal = (props: ModalProps) => {
-  const { showModal, onClickClose } = props;
+  const { showModal, selectedRow, clearSelectedRow } = props;
+  const { contextState, setContextState } = useContext(TodosContext);
+  const [updatedRow, setUpdatedRow] = useState<ITodosEntries>(selectedRow);
+  console.log('Modal', updatedRow);
+
+  function updateData() {
+    // Здесь должен бы быть запрос на бэкенд, чтобы получить обновленый массив объектов.
+    // Но т.к. ресурс jsonplaceholder вернет лишь обнолвенный объект, было сымитировано
+    // поведение путем редактирования локального стэйта.
+    const index = contextState.findIndex((item) => item.id === updatedRow.id);
+    const unpdatedTodos = [
+      ...contextState.slice(0, index),
+      Object.assign({}, contextState[index], updatedRow),
+      ...contextState.slice(index + 1),
+    ];
+
+    setContextState(unpdatedTodos);
+    clearSelectedRow();
+  }
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    const { id, value } = e.target;
+    setUpdatedRow((prevState: ITodosEntries) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  }
 
   return (
     <>
       <ReactModal
         isOpen={showModal}
-        onRequestClose={onClickClose}
+        onRequestClose={clearSelectedRow}
         style={customModalStyles}
       >
         <div>
-          <h2>Модальное окно</h2>
           <div>
-            <label htmlFor="userTitle">User Title:</label>
-            <input type="text" id="userTitle" />
+            <label htmlFor="userId">UserID:</label>
+            <input
+              type="text"
+              id="userId"
+              defaultValue={selectedRow?.userId}
+              onChange={(e) => handleInputChange(e)}
+            />
           </div>
           <div>
-            <label htmlFor="Title">Title:</label>
-            <input type="text" id="Title" />
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              defaultValue={selectedRow?.title}
+              onChange={(e) => handleInputChange(e)}
+            />
           </div>
           <div>
             <label htmlFor="completed">Completed:</label>
-            <input type="text" id="completed" />
+            <input
+              type="text"
+              id="completed"
+              defaultValue={String(selectedRow?.completed)}
+              onChange={(e) => handleInputChange(e)}
+            />
           </div>
           <div>
-            <button type="button" onClick={onClickClose}>
+            <button type="button" onClick={clearSelectedRow}>
               Close
             </button>
-            <button type="button">Save</button>
+            <button type="button" onClick={updateData}>
+              Save
+            </button>
           </div>
         </div>
       </ReactModal>
