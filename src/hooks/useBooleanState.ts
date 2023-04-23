@@ -5,7 +5,8 @@ import { useCallback, useState } from 'react';
  *
  * @export
  * @param {boolean} [defaultValue=false]
- * @returns {[boolean, () => void, () => void]}[currentState, setTrue, setFalse, toggle] - порядок легко запомнить (как для тернарного оператора)
+ * @returns {[boolean, () => void, () => void]}
+ * [currentState, setTrue, setFalse, toggle] - порядок легко запомнить (как для тернарного оператора)
  */
 
 export function useBooleanState(

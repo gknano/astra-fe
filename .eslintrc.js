@@ -23,6 +23,11 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
+    'max-len': ['error', { code: 120 }],
+    'max-lines': [
+      'warn',
+      { max: 150, skipBlankLines: true, skipComments: true },
+    ],
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-empty-function': 'off',
   },
