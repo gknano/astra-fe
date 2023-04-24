@@ -4,24 +4,16 @@ import { Modal } from '../Modal';
 import { useBooleanState } from '../../../hooks';
 import { TodosContext } from '../../../Context';
 
+import { columns, defaultSelectedRow } from './utils';
+
 import type { ITodosEntries } from '../../../Context/types';
 
 import './Table.scss';
 
-const columns = [
-  { label: 'ID', width: '5%' },
-  { label: 'User', width: '10%' },
-  { label: 'Title', width: '55%' },
-  { label: 'Status', width: '15%' },
-  { label: 'Actions', width: '15%' },
-];
-
-const defaultSelectedRow = { userId: 0, id: 0, title: '', completed: false };
-
 export function Table() {
   console.log('Table render');
 
-  const { contextState } = useContext(TodosContext);
+  const { contextState, setContextState } = useContext(TodosContext);
   const [isShowModal, setTrue, setFalse] = useBooleanState(false);
   const [selectedRow, setSelectedRow] =
     useState<ITodosEntries>(defaultSelectedRow);
@@ -38,6 +30,18 @@ export function Table() {
     setSelectedRow(defaultSelectedRow);
     setFalse();
   }, [setFalse]);
+
+  function deleteData(id: number) {
+    // Здесь должен бы быть запрос на бэкенд, чтобы получить обновленый массив объектов.
+    // Но т.к. ресурс jsonplaceholder не вернет обнолвенный массив, было сымитировано
+    // поведение путем редактирования локального стэйта.
+    const index = contextState.findIndex((item) => item.id === id);
+    const updatedTodos = [...contextState];
+    updatedTodos.splice(index, 1);
+
+    setContextState(updatedTodos);
+    clearSelectedRow();
+  }
 
   return (
     <>
@@ -94,7 +98,9 @@ export function Table() {
                 >
                   Edit
                 </button>
-                <button className="buttons">Delete</button>
+                <button className="buttons" onClick={() => deleteData(item.id)}>
+                  Delete
+                </button>
                 <button className="buttons">Add</button>
               </div>
             </div>
