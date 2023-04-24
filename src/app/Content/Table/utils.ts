@@ -7,7 +7,7 @@ export const columns = [
 ];
 
 export const defaultSelectedRow = {
-  userId: 0,
+  userId: 1,
   id: 0,
   title: '',
   completed: false,

@@ -7,7 +7,7 @@ export interface ITodosEntries {
   completed: boolean;
 }
 
-export type TodosDTO = ITodosEntries[] | [];
+export type TodosDTO = ITodosEntries[];
 
 export interface ITodosContext {
   contextState: TodosDTO;

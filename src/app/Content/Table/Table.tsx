@@ -101,7 +101,12 @@ export function Table() {
                 <button className="buttons" onClick={() => deleteData(item.id)}>
                   Delete
                 </button>
-                <button className="buttons">Add</button>
+                <button
+                  className="buttons"
+                  onClick={() => onChangeHandle(defaultSelectedRow)}
+                >
+                  Add
+                </button>
               </div>
             </div>
           ))}

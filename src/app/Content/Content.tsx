@@ -11,7 +11,6 @@ import './Content.scss';
 
 export function Content() {
   const { setContextState } = useContext(TodosContext);
-  console.log('Contetnt render');
 
   useEffect(() => {
     getData()
